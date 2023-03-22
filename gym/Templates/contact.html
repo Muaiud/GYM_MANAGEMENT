@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/style.css' %}">
+    <title>CONTACT</title>
+</head>
+<body>
+    <form method="post" action="{% url 'contact' %}">
+        {% csrf_token %}
+        <div class="txt_field">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Your Name" required>
+        </div>
+        <div class="txt_field">
+            <label>Email</label>
+            <input type="email" name="email" required>
+        </div>
+        <div class="txt_field">
+            <label>Contact</label>
+            <input type="number" name="contact" required>
+        </div>
+        <div class="txt_field">
+            <label>message</label>
+            <input type="text" name="message" required>
+        </div>
+        <div class="signup_link">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</body>
+</html>

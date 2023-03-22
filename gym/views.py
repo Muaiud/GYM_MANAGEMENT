@@ -5,8 +5,7 @@ from datetime import datetime
 
 from django.utils import timezone
 
-from gym.models import User
-
+from gym.models import User,Contact
 
 def LogIn(request):
     if request.method == "POST":
@@ -38,11 +37,9 @@ def SignUp(request):
         except Exception as e:
             return redirect("/signup/")
     return render(request, 'signUp.html')
-
+        
 def Homepage(request):
     today = timezone.now()
-    print("hello")
-    print(today)
     show_plan = False
     user = request.user
     if user.is_authenticated:
@@ -50,3 +47,18 @@ def Homepage(request):
             show_plan = True
         return render(request, "homepage.html", context={"show_plan": show_plan})
     return redirect("/")
+def about(request):
+    return render(request, 'about.html')    
+# def contact(request):
+#     return render(request, 'contact.html')  
+ 
+def contact(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        contact = request.POST.get("contact")
+        message = request.POST.get("message")
+        print(name,email,contact,message)
+        data = Contact(name=name,contact=contact,email=email,message=message)
+        data.save()
+    return render(request, 'contact.html')    
